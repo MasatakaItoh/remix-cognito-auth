@@ -1,12 +1,13 @@
 import { createCookieSessionStorage } from "@remix-run/node";
+import { User } from "./auth";
 
 const sessionSecret = process.env.SESSION_SECRET;
 
 if (sessionSecret === undefined) {
-  throw new Error("SESSION_SECRETを設定してください。");
+  throw new Error("SESSION_SECRETを設定してください");
 }
 
-export const sessionStorage = createCookieSessionStorage({
+export const sessionStorage = createCookieSessionStorage<User>({
   cookie: {
     name: "session",
     sameSite: "lax",
